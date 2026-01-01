@@ -78,3 +78,26 @@ To:
 ```eula=true```
 
 Save and exit.
+
+Create a Startup Script
+
+```
+nano start.sh
+```
+
+Paste the following (adjust RAM values as needed):
+```
+#!/bin/bash
+java -Xms2G -Xmx4G -jar server.jar nogui
+```
+
+Make the script executable:
+```
+chmod +x start.sh
+```
+
+Start the server:
+```
+./start.sh
+```
+
