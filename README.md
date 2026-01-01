@@ -12,10 +12,10 @@ Always start by updating the OS.
 sudo apt update && sudo apt upgrade -y
 sudo reboot
 ```
-Install OpenJDK 17:
+Install OpenJDK:
 
 ```
-sudo apt install openjdk-17-jre-headless -y
+sudo apt install default-jdk
 
 java -version
 ```
