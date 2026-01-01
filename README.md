@@ -61,6 +61,38 @@ Rename for simplicity:
 ```
 mv paper-*.jar server.jar
 ```
+
+If you get an error, its most likely due to Java,
+
+so try this:
+
+```
+java -version
+```
+
+Grab updates and install jdk 21
+```
+sudo apt update
+sudo apt install openjdk-21-jdk
+```
+
+Ensure JDK 21 is primary
+
+```
+sudo update-alternatives --config java
+```
+
+Check Version:
+```
+java -version
+```
+Should show 21 as version
+
+Now try to start server again:
+```
+java -jar server.jar
+```
+
 Accept the EULA
 
 Run the server once to generate required files:
@@ -101,3 +133,37 @@ Start the server:
 ./start.sh
 ```
 
+Auto-Start the Server on Boot (systemd)
+
+Create the systemd service file:
+
+```
+sudo nano /etc/systemd/system/minecraft.service
+```
+Paste the following configuration:
+```
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/home/minecraft/minecraft
+ExecStart=/home/minecraft/minecraft/start.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start the service:
+```
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable minecraft
+sudo systemctl start minecraft
+```
+Check service status:
+```
+sudo systemctl status minecraft
+```
